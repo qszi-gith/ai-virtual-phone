@@ -55,6 +55,21 @@ const nextConfig = {
     }
     return config;
   },
+
+  // 👇 新增的 rewrites 配置，加在 webpack 后面，注意 webpack 那项末尾已经有逗号了
+  async rewrites() {
+    return [
+      {
+        source: '/api/proxy/kilo/:path*',
+        destination: 'https://ai-gateway.kilo.ai/api/v1/:path*', // 请换成你真实可用的 Kilo Base URL
+      },
+      // 如果你也想代理 Open Design，取消下面注释并替换成真实地址
+       {
+         source: '/api/proxy/opendesign/:path*',
+         destination: 'https://amr-link.open-design.ai/v1/:path*',
+       },
+    ];
+  },
 };
 
 export default nextConfig;
